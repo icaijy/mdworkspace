@@ -29,6 +29,16 @@ $$E = -A\ln(0.1) = -(2.82976095867 \times \ln(0.1)) \approx 6.5157654001701$$
 The finalized, structurally optimized, and boundary-stabilized hybrid mathematical model is defined as:
 $$f: [0,280]\to\mathbb{R},\quad f(x)= 2.82976095867\ln(x+0.1)- 0.459895034255x+ 0.000320857875479x^{2}+ 6.5157654001701+ 6.2354020108\sqrt{x}$$
 
+Where the independent variable $x$ explicitly denotes the time elapsed post-calving (Days in Milk, DIM) measured in **days**, and the dependent functional output $f(x)$ quantifies the absolute daily milk volume produced, measured in **Litres per day (L/day)**.
+
+### Analytical Differentiation and Peak Coordinates Extraction
+To rigorously verify the stationary turning point governing maximum production capacity within this original formulation, the optimized hybrid function is differentiated using standard calculus rules (the chain rule and power rule):
+$$f'(x) = \frac{2.82976095867}{x+0.1} - 0.459895034255 + 0.000641715750958x + \frac{3.1177010054}{\sqrt{x}}$$
+
+Setting the global first derivative to zero ($f'(x) = 0$) to locate the mathematical global maximum within the domain, numerical approximation routines performed via the technological solver isolate the precise empirical peak turning point at the following coordinates:
+$$\text{Peak Location} \approx (69.25, 40.09)$$
+This indicates that the modeled biological subject reaches its absolute peak performance of $40.09\text{ L/day}$ at exactly $69.25\text{ days}$ postpartum, establishing highly realistic alignment with field observations.
+
 ### Layered Function Selection Strategy
 Rather than relying on an arbitrary polynomial fit, this model utilizes a **layered basis function design approach**, superimposing a global polynomial backbone with specialized non-linear functions to handle distinct biological growth regimes:
 
@@ -59,7 +69,7 @@ where $Y_t$ defines the daily milk yield in Litres at $t$ days post-calving.
 
 ### Mathematical Derivation of Crucial Curve Features
 The turning point corresponding to peak production is determined analytically by isolating the stationary point where the first derivative equals zero ($\frac{dY}{dt} = 0$). Differentiating Wood's model via the product rule yields:
-$$\frac{dY}{dt} = \frac{d}{dt}(at^b) \cdot e^{-ct} + at^b \cdot \frac{d}{dt}(e^{-ct})$$
+$$\frac{dY}{dt} = \frac{d}{dt}(at^b) * e^{-ct} + at^b * \frac{d}{dt}(e^{-ct})$$
 $$\frac{dY}{dt} = abt^{b-1}e^{-ct} - act^be^{-ct}$$
 $$\frac{dY}{dt} = at^{b-1}e^{-ct}(b - ct)$$
 
@@ -72,7 +82,16 @@ $$Y_{\text{max}} = Y\left(\frac{b}{c}\right) = a\left(\frac{b}{c}\right)^b e^{-c
 
 This uncovers a vital structural insight: the timing of peak production ($t_{\text{peak}}$) is exclusively dictated by the ratio of growth to decay parameters ($\frac{b}{c}$), entirely independent of the scale parameter $a$. Conversely, the maximum yield volume ($Y_{\text{max}}$) scales perfectly linearly with parameter $a$.
 
-
+### Advanced Curvature Analysis: Inflection Points and Persistency
+To map the behavioral mechanics of persistency mathematically, the second derivative of Wood's function must be evaluated to identify the point of inflection ($\frac{d^2Y}{dt^2} = 0$), where the rate of production decline transitions from accelerating acceleration to a stabilizing, linear-like decay:
+$$\frac{d^2Y}{dt^2} = \frac{d}{dt} \left[ abt^{b-1}e^{-ct} - act^be^{-ct} \right]$$
+Applying the product rule to each independent component yields:
+$$\frac{d^2Y}{dt^2} = ab(b-1)t^{b-2}e^{-ct} - abct^{b-1}e^{-ct} - acbt^{b-1}e^{-ct} + ac^2t^be^{-ct}$$
+Factoring out the shared non-zero base component ($at^{b-2}e^{-ct}$) simplifies the statement into a standard quadratic structure:
+$$\frac{d^2Y}{dt^2} = at^{b-2}e^{-ct} \left[ c^2t^2 - 2bct + b(b-1) \right]$$
+Setting $\frac{d^2Y}{dt^2} = 0$, the root establishing the post-peak inflection marker $t_{\text{inflection}}$ is solved using the quadratic formula:
+$$c^2t^2 - 2bct + b(b-1) = 0 \implies t_{\text{inflection}} = \frac{2bc + \sqrt{(-2bc)^2 - 4c^2b(b-1)}}{2c^2} = \frac{b + \sqrt{b}}{c}$$
+Biologically, $t_{\text{inflection}}$ isolates the exact temporal boundary where the acute post-peak metabolic drop-off reaches maximum velocity, immediately before smoothing out into the prolonged mid-to-late lactation persistency phase.
 
 ---
 
@@ -83,7 +102,18 @@ $$Y_t = a + b e^{-kt} + ct$$
 
 ### Key Structural Features
 * **Post-Peak Linear Decline Baseline ($a + ct$):** As time progresses ($t \to \infty$), the early-stage exponential adjustment term asymptotically collapses to zero ($b e^{-kt} \to 0$). The function simplifies to a linear profile: $Y_t \approx a + ct$. In a biologically realistic model, $c < 0$ dictates the continuous daily rate of production decline, while parameter $a$ represents the critical vertical intercept of this late-lactation linear baseline.
-* **Early-Stage Exponential Adjustment ($b e^{-kt}$):** To accurately model the initial postpartum production surge, parameters are constrained to $b < 0$ and $k > 0$. At calving ($t=0$), the yield starts at a suppressed value ($Y_0 = a + b$). As $t$ increases, $b e^{-kt}$ climbs rapidly from its negative value toward zero, creating the upward slope. The constant $k$ acts as an adjustment velocity parameter, governing how sharply the curve transitions into its peak.
+* **Early-Stage Exponential Adjustment ($b e^{-kt}$):** To accurately model the initial postpartum production surge, parameters are constrained to $b < 0$ and $k > 0$. At calving ($t=0$), the yield starts at an analytically suppressed initial value bounding the $y$-intercept at:
+$$Y_0 = a + b e^{-k(0)} + c(0) = a + b$$
+As $t$ increases, the term $b e^{-kt}$ climbs rapidly from its negative baseline value toward zero, constructing the characteristic upward slope. The constant $k$ acts as an adjustment velocity parameter, governing how sharply the curve transitions into its peak.
+
+### Mathematical Derivation of Wilmink Curve Features
+The operational turning point defining peak production within Wilmink's additive formulation is mapped by executing an exact first-order differentiation with respect to time $t$:
+$$\frac{dY_t}{dt} = \frac{d}{dt}\left(a + b e^{-kt} + ct\right) = -bke^{-kt} + c$$
+Imposing the critical baseline condition for local extrema ($\frac{dY_t}{dt} = 0$) isolates the peak time placeholder $t_{\text{peak}}$:
+$$-bke^{-kt_{\text{peak}}} + c = 0 \implies e^{-kt_{\text{peak}}} = \frac{c}{bk}$$
+Applying the natural logarithm to both sides isolates the explicit algebraic expression for peak timing:
+$$-kt_{\text{peak}} = \ln\left(\frac{c}{bk}\right) \implies t_{\text{peak}} = \frac{1}{k}\ln\left(\frac{bk}{c}\right)$$
+*(Note: Because standard empirical constraints enforce $b < 0$ and $c < 0$, the internal ratio $\frac{bk}{c}$ remains strictly positive, ensuring structural continuity within the real logarithmic domain).*
 
 ### Comparative Analytical Framework
 
@@ -96,6 +126,8 @@ $$Y_t = a + b e^{-kt} + ct$$
 | **Long-Term Tail Behavior ($t \to \infty$)** | Asymptotically decays to zero ($Y_t \to 0$) | Diverges linearly to negative infinity ($Y_t \to -\infty$) |
 | **Empirical Fit Flexibility** | Excellent for classic unimodal shapes; struggles when initial calving yields are highly elevated. | Highly flexible for empirical regressions; isolates the initial calving baseline from the decay rate. |
 
+---
+
 # 4. Comparative Analysis of Lactation Profiles Across Species
 
 ### Graph Structural Features (Axes, Scales, and Units)
@@ -106,8 +138,8 @@ The mathematical models for both species are defined as follows:
 * **Ovine (Awassi, Parity 2):** $$Y_{\text{sheep}}(t) = 0.42 \cdot t^{0.33} \cdot e^{-0.012t}$$
 
 When plotting these functions, the structural configurations of the graphs reveal distinct scaling properties:
-* **Horizontal Axis ($t$):** Both graphs share an identical independent variable representing 'Days in Milk' (DIM). The operational domain is set across a standard lactation cycle of $[0, 305]$ days.
-* **Vertical Axis ($Y_t$):** Both axes quantify daily milk volume (measured in Litres or Kilograms per day). However, their geometric scales require drastically different vertical windows to maintain visual clarity. The Bovine curve requires a vertical scaling window of $[0, 40]$ to capture its massive amplitude, whereas the Ovine curve requires a highly compressed vertical window of $[0, 2]$ to prevent the profile from appearing as a flat line.
+* **Horizontal Axis ($t$):** Both graphs share an identical independent variable representing 'Days in Milk' (DIM) measured in units of **days**. The operational domain is set across a standard lactation cycle of $[0, 305]$ days.
+* **Vertical Axis ($Y_t$):** Both axes quantify daily milk volume (measured in **Litres per day, L/day** or Kilograms per day). However, their geometric scales require drastically different vertical windows to maintain visual clarity. The Bovine curve requires a vertical scaling window of $[0, 40]$ to capture its massive amplitude, whereas the Ovine curve requires a highly compressed vertical window of $[0, 2]$ to prevent the profile from appearing as a flat line.
 
 
 ![](https://raw.githubusercontent.com/icaijy/md-image/main/20260522120223890.png)
@@ -143,9 +175,6 @@ When plotting these functions, the structural configurations of the graphs revea
 * **Biological Rationale for Structural Similarities:** The shared unimodal profile and early peak timing are governed by universal mammalian endocrine mechanisms triggered postpartum. The act of giving birth (calving/lambing) induces a massive systemic surge in lactogenic hormones (such as prolactin and growth hormone), which rapidly stimulates and recruits dormant mammary secretory epithelial cells, causing the initial explosive surge in yield ($b > 0$). Eventually, the biological system reaches its cellular limit at $t_{\text{peak}}$. Beyond this point, the natural, gradual aging and programmed cell death (apoptosis) of these secretory cells sets in, causing the inevitable, continuous decline in daily milk volume ($c > 0$).
 * **Biological Rationale for Amplitude and Scale Differences:** The extreme difference in the scale parameter $a$ and absolute peak volume $Y_{\text{max}}$ is rooted in body mass scaling and intensive genetic selection. Dairy cattle possess a significantly larger physical mammary gland volume and a vastly superior network of blood vessels capable of pumping hundreds of litres of nutrient-rich blood through the udder per hour. Furthermore, the Holstein breed has undergone centuries of intensive, systematic artificial selection aimed exclusively at maximizing commercial fluid milk volume, prioritizing metabolic energy toward milk synthesis far beyond the evolutionary baseline of small ruminants like the Awassi sheep.
 * **Biological Rationale for Decay Tail and Persistency Variance:** The discrepancy in the post-peak decline slope ($c$) reflects fundamentally different biological energy allocation strategies. High-producing dairy cows are genetically driven to maintain a stable, prolonged population of active mammary epithelial cells via continuous endocrine support, optimizing long-term "persistency" for commercial farming. Conversely, sheep exhibit lower lactation persistency; their biological systems are evolutionary optimized to down-regulate milk production rapidly once the offspring passes the initial critical growth phase. Their higher mammary cell apoptosis rate ($c = 0.012$) allows them to aggressively conserve metabolic energy, reallocating bodily resources toward maintaining their own body condition and preparing for the next seasonal reproductive cycle.
-
-
-
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MjUxMDk5NzddfQ==
+eyJoaXN0b3J5IjpbLTg1NjgyNzIzMiwtMTUyNTEwOTk3N119
 -->
