@@ -122,7 +122,7 @@ $$-kt_{\text{peak}} = \ln\left(\frac{c}{bk}\right) \implies t_{\text{peak}} = \f
 | **Mathematical Structure** | Multiplicative (Power $\times$ Exponential) | Additive (Linear $+$ Exponential) |
 | **Standard Parameter Constraints** | $a > 0, \ b > 0, \ c > 0$ | $a > 0, \ b < 0, \ c < 0, \ k > 0$ |
 | **Time to Peak ($t_{\text{peak}}$)** | $$t_{\text{peak}} = \frac{b}{c}$$|$$t_{\text{peak}} = \frac{1}{k}\ln\left(\frac{bk}{c}\right)$$ |
-| **Peak Yield Formula ($Y_{\text{max}}$)** | $$Y_{\text{max}} = a\left(\frac{b}{c}\right)^b e^{-b}$$|$$Y_{\text{max}} = a + \frac{c}{k}\left(1 - \ln\left(\frac{bk}{c}\right)\right)$$ |
+| **Peak Yield Formula ($Y_{\text{max}}$)** | $$Y_{\text{max}} = a\left(\frac{b}{c}\right)^b e^{-b}$$|$$Y_{\text{max}} = a + \frac{c}{k}\left(1 + \ln\left(\frac{bk}{c}\right)\right)$$ |
 | **Long-Term Tail Behavior ($t \to \infty$)** | Asymptotically decays to zero ($Y_t \to 0$) | Diverges linearly to negative infinity ($Y_t \to -\infty$) |
 | **Empirical Fit Flexibility** | Excellent for classic unimodal shapes; struggles when initial calving yields are highly elevated. | Highly flexible for empirical regressions; isolates the initial calving baseline from the decay rate. |
 
@@ -176,5 +176,6 @@ When plotting these functions, the structural configurations of the graphs revea
 * **Biological Rationale for Amplitude and Scale Differences:** The extreme difference in the scale parameter $a$ and absolute peak volume $Y_{\text{max}}$ is rooted in body mass scaling and intensive genetic selection. Dairy cattle possess a significantly larger physical mammary gland volume and a vastly superior network of blood vessels capable of pumping hundreds of litres of nutrient-rich blood through the udder per hour. Furthermore, the Holstein breed has undergone centuries of intensive, systematic artificial selection aimed exclusively at maximizing commercial fluid milk volume, prioritizing metabolic energy toward milk synthesis far beyond the evolutionary baseline of small ruminants like the Awassi sheep.
 * **Biological Rationale for Decay Tail and Persistency Variance:** The discrepancy in the post-peak decline slope ($c$) reflects fundamentally different biological energy allocation strategies. High-producing dairy cows are genetically driven to maintain a stable, prolonged population of active mammary epithelial cells via continuous endocrine support, optimizing long-term "persistency" for commercial farming. Conversely, sheep exhibit lower lactation persistency; their biological systems are evolutionary optimized to down-regulate milk production rapidly once the offspring passes the initial critical growth phase. Their higher mammary cell apoptosis rate ($c = 0.012$) allows them to aggressively conserve metabolic energy, reallocating bodily resources toward maintaining their own body condition and preparing for the next seasonal reproductive cycle.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1NjgyNzIzMiwtMTUyNTEwOTk3N119
+eyJoaXN0b3J5IjpbODE4Mjg3NzE0LC04NTY4MjcyMzIsLTE1Mj
+UxMDk5NzddfQ==
 -->
