@@ -15,7 +15,8 @@ $$y = A\cdot \ln(x+0.1) + B\cdot e^{(x+3)} + Cx + Dx^2 + E + U\cdot \sqrt{x}$$
 ![Image](https://raw.githubusercontent.com/icaijy/md-image/main/Untitled.png)
 
 Executing a non-linear least-squares regression optimization via [Desmos](https://www.desmos.com/calculator/ioxoio3elf) maps the empirical dataset to the following heavily parameterized function:
-$$g(x)= -3.1401734205\cdot10^{-146}\cdot e^{(x+3)}+ 2.82976095867\ln(x+0.1)- 0.459895034255x+ 0.000320857875479x^{2}+ 6.54535870733+ 6.2354020108\sqrt{x}$$
+$g(x)= -3.1401734205\cdot10^{-146}\cdot e^{(x+3)}+ 2.82976095867\ln(x+0.1)- 0.459895034255x+ 
+0.000320857875479x^{2}+ 6.54535870733+ 6.2354020108\sqrt{x}$
 
 > The exact coordinates of the empirical data points utilized for this non-linear regression analysis are fully documented and plotted within the accompanying [Desmos](https://www.desmos.com/calculator/ioxoio3elf) project.
 
@@ -23,19 +24,23 @@ $$g(x)= -3.1401734205\cdot10^{-146}\cdot e^{(x+3)}+ 2.82976095867\ln(x+0.1)- 0.4
 The coefficient of the exponential term is mathematically negligible ($-3.14 \times 10^{-146}$). Even at the extreme upper boundary of the domain ($x = 280$), the value of this term evaluates to approximately $-7.7 \times 10^{-24}$, which yields absolutely zero geometric or numeric impact on the curve profile. To maintain structural parsimony and prevent numerical instability, this term is discarded.
 
 Furthermore, a critical physical constraint dictates that at the exact moment of calving ($x = 0$), the milk yield must be precisely zero ($f(0) = 0$). Evaluating the remaining basis functions at $x = 0$ yields:
-$$2.82976095867\ln(0.1) - 0.459895034255(0) + 0.000320857875479(0)^2 + 6.2354020108\sqrt{0} = 2.82976095867 \times (-2.30258509299) \approx -6.51576540017$$
+
+$2.82976095867\ln(0.1) - 0.459895034255(0) + 0.000320857875479(0)^2 + 6.2354020108\sqrt{0} = 2.82976095867 \times (-2.30258509299) \approx -6.51576540017$
 
 The raw statistical regression baseline constant ($E = 6.54535870733$) introduces a slight positive offset at calving due to global data pooling. To strictly enforce the $(0,0)$ endpoint constraint without distorting the curve's dynamics, the global constant $E$ is analytically adjusted to counteract the logarithmic initial offset:
-$$E = -A\ln(0.1) = -(2.82976095867 \times \ln(0.1)) \approx 6.5157654001701$$
+
+$E = -A\ln(0.1) = -(2.82976095867 \times \ln(0.1)) \approx 6.5157654001701$
 
 The finalized, structurally optimized, and boundary-stabilized hybrid mathematical model is defined as:
-$$f: [0,280]\to\mathbb{R},\quad f(x)= 2.82976095867\ln(x+0.1)- 0.459895034255x+ 0.000320857875479x^{2}+ 6.5157654001701+ 6.2354020108\sqrt{x}$$
+
+$f: [0,280]\to\mathbb{R},\quad f(x)= 2.82976095867\ln(x+0.1)- 0.459895034255x+0.000320857875479x^{2}+ 6.5157654001701+ 6.2354020108\sqrt{x}$
 
 Where the independent variable $x$ explicitly denotes the time elapsed post-calving (Days in Milk, DIM) measured in **days**, and the dependent functional output $f(x)$ quantifies the absolute daily milk volume produced, measured in **Litres per day (L/day)**.
 
 ### Analytical Differentiation and Peak Coordinates Extraction
 To rigorously verify the stationary turning point governing maximum production capacity within this original formulation, the optimized hybrid function is differentiated using standard calculus rules (the chain rule and power rule):
-$$f'(x) = \frac{2.82976095867}{x+0.1} - 0.459895034255 + 0.000641715750958x + \frac{3.1177010054}{\sqrt{x}}$$
+
+$f'(x) = \frac{2.82976095867}{x+0.1} - 0.459895034255 + 0.000641715750958x + \frac{3.1177010054}{\sqrt{x}}$
 
 Setting the global first derivative to zero ($f'(x) = 0$) to locate the mathematical global maximum within the domain, numerical approximation routines performed via the technological solver isolate the precise empirical peak turning point at the following coordinates:
 $$\text{Peak Location} \approx (69.25, 40.09)$$
@@ -178,6 +183,6 @@ When plotting these functions, the structural configurations of the graphs revea
 * **Biological Rationale for Amplitude and Scale Differences:** The extreme difference in the scale parameter $a$ and absolute peak volume $Y_{\text{max}}$ is rooted in body mass scaling and intensive genetic selection. Dairy cattle possess a significantly larger physical mammary gland volume and a vastly superior network of blood vessels capable of pumping hundreds of litres of nutrient-rich blood through the udder per hour. Furthermore, the Holstein breed has undergone centuries of intensive, systematic artificial selection aimed exclusively at maximizing commercial fluid milk volume, prioritizing metabolic energy toward milk synthesis far beyond the evolutionary baseline of small ruminants like the Awassi sheep.
 * **Biological Rationale for Decay Tail and Persistency Variance:** The discrepancy in the post-peak decline slope ($c$) reflects fundamentally different biological energy allocation strategies. High-producing dairy cows are genetically driven to maintain a stable, prolonged population of active mammary epithelial cells via continuous endocrine support, optimizing long-term "persistency" for commercial farming. Conversely, sheep exhibit lower lactation persistency; their biological systems are evolutionary optimized to down-regulate milk production rapidly once the offspring passes the initial critical growth phase. Their higher mammary cell apoptosis rate ($c = 0.012$) allows them to aggressively conserve metabolic energy, reallocating bodily resources toward maintaining their own body condition and preparing for the next seasonal reproductive cycle.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNTUwMTIzNzcsODE4Mjg3NzE0LC04NT
-Y4MjcyMzIsLTE1MjUxMDk5NzddfQ==
+eyJoaXN0b3J5IjpbNzAwMDU3OTAzLC0xMjU1MDEyMzc3LDgxOD
+I4NzcxNCwtODU2ODI3MjMyLC0xNTI1MTA5OTc3XX0=
 -->
