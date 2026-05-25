@@ -94,11 +94,17 @@ This uncovers a vital structural insight: the timing of peak production ($t_{\te
 To map the behavioral mechanics of persistency mathematically, the second derivative of Wood's function must be evaluated to identify the point of inflection ($\frac{d^2Y}{dt^2} = 0$), where the rate of production decline transitions from accelerating acceleration to a stabilizing, linear-like decay:
 $$\frac{d^2Y}{dt^2} = \frac{d}{dt} \left[ abt^{b-1}e^{-ct} - act^be^{-ct} \right]$$
 Applying the product rule to each independent component yields:
-$$\frac{d^2Y}{dt^2} = ab(b-1)t^{b-2}e^{-ct} - abct^{b-1}e^{-ct} - acbt^{b-1}e^{-ct} + ac^2t^be^{-ct}$$
+
+$\frac{d^2Y}{dt^2} = ab(b-1)t^{b-2}e^{-ct} - abct^{b-1}e^{-ct} - acbt^{b-1}e^{-ct} + ac^2t^be^{-ct}$
+
 Factoring out the shared non-zero base component ($at^{b-2}e^{-ct}$) simplifies the statement into a standard quadratic structure:
-$$\frac{d^2Y}{dt^2} = at^{b-2}e^{-ct} \left[ c^2t^2 - 2bct + b(b-1) \right]$$
+
+$\frac{d^2Y}{dt^2} = at^{b-2}e^{-ct} \left[ c^2t^2 - 2bct + b(b-1) \right]$
+
 Setting $\frac{d^2Y}{dt^2} = 0$, the root establishing the post-peak inflection marker $t_{\text{inflection}}$ is solved using the quadratic formula:
-$$c^2t^2 - 2bct + b(b-1) = 0 \implies t_{\text{inflection}} = \frac{2bc + \sqrt{(-2bc)^2 - 4c^2b(b-1)}}{2c^2} = \frac{b + \sqrt{b}}{c}$$
+
+$c^2t^2 - 2bct + b(b-1) = 0 \implies t_{\text{inflection}} = \frac{2bc + \sqrt{(-2bc)^2 - 4c^2b(b-1)}}{2c^2} = \frac{b + \sqrt{b}}{c}$
+
 Biologically, $t_{\text{inflection}}$ isolates the exact temporal boundary where the acute post-peak metabolic drop-off reaches maximum velocity, immediately before smoothing out into the prolonged mid-to-late lactation persistency phase.
 
 ---
@@ -184,6 +190,6 @@ When plotting these functions, the structural configurations of the graphs revea
 * **Biological Rationale for Amplitude and Scale Differences:** The extreme difference in the scale parameter $a$ and absolute peak volume $Y_{\text{max}}$ is rooted in body mass scaling and intensive genetic selection. Dairy cattle possess a significantly larger physical mammary gland volume and a vastly superior network of blood vessels capable of pumping hundreds of litres of nutrient-rich blood through the udder per hour. Furthermore, the Holstein breed has undergone centuries of intensive, systematic artificial selection aimed exclusively at maximizing commercial fluid milk volume, prioritizing metabolic energy toward milk synthesis far beyond the evolutionary baseline of small ruminants like the Awassi sheep.
 * **Biological Rationale for Decay Tail and Persistency Variance:** The discrepancy in the post-peak decline slope ($c$) reflects fundamentally different biological energy allocation strategies. High-producing dairy cows are genetically driven to maintain a stable, prolonged population of active mammary epithelial cells via continuous endocrine support, optimizing long-term "persistency" for commercial farming. Conversely, sheep exhibit lower lactation persistency; their biological systems are evolutionary optimized to down-regulate milk production rapidly once the offspring passes the initial critical growth phase. Their higher mammary cell apoptosis rate ($c = 0.012$) allows them to aggressively conserve metabolic energy, reallocating bodily resources toward maintaining their own body condition and preparing for the next seasonal reproductive cycle.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzE0MjMyNTQxLC0xMjU1MDEyMzc3LDgxOD
-I4NzcxNCwtODU2ODI3MjMyLC0xNTI1MTA5OTc3XX0=
+eyJoaXN0b3J5IjpbMjEyNTcxNzg0NSwtMTI1NTAxMjM3Nyw4MT
+gyODc3MTQsLTg1NjgyNzIzMiwtMTUyNTEwOTk3N119
 -->
